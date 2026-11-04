@@ -1,6 +1,8 @@
 # Catalog Muse
 
-React + TypeScript + Vite app, set up the same way as AsinZen ZenGraph.
+React + TypeScript + Vite app
+
+Live Application Deployment: https://catalog-muse-demo.asinzen.com/
 
 ## Scripts
 
