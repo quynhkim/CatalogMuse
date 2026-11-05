@@ -1,6 +1,0 @@
-$kind: collection
-description: HTTP contract for the Go backend. The service listens on 127.0.0.1:8790. Create a job, watch it, then approve the waiting step. The copywriter and the auditor stop once, together. A change note sends the listing back to the copywriter, and the auditor runs again before that same approval. Nothing here publishes a listing. The supplier photo is raw base64, not a data URL, and must decode to under 8 MB. marketplaces is amazon, walmart, or both. Omit it for Amazon only. Walmart is a separate title, an HTML key-feature list, and a shelf description. The auditor checks each selected marketplace in code, and approve stays closed until every list is clear. Image urls are presigned GETs for asinzen-catalogmuse. They last 12 hours and are signed again on each Get job. Without a bucket, url is this service's file route.
-variables:
-  base_url: http://127.0.0.1:8790
-  job_id: job_example
-  file_name: cutout.png

@@ -1,8 +1,0 @@
-$kind: http-request
-name: Watch job events
-method: GET
-url: '{{base_url}}/v1/jobs/{{job_id}}/events'
-order: 3000
-description: >-
-  Server-sent events. Each change is "event: status" and a job object.
-  A missing job is "event: error". The stream ends when status is approved or failed.

@@ -1,7 +1,0 @@
-name: Local
-values:
-  - key: base_url
-    value: 'http://127.0.0.1:8790'
-    enabled: true
-    type: default
-    description: CatalogMuse agent service on this machine.
