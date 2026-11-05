@@ -16,7 +16,7 @@ from typing import Any, Iterator
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, StreamingResponse
+from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
 from pydantic import BaseModel
 
 from catalogmuse.orchestrator import JobError, Orchestrator, decode_image
@@ -60,11 +60,6 @@ def create_app(data_dir: Path | None = None, tools: Tools | None = None, public_
         allow_methods=["*"],
         allow_headers=["*"],
     )
-
-    @app.get("/", response_class=HTMLResponse)
-    def test_ui() -> HTMLResponse:
-        page = Path(__file__).with_name("test_ui.html").read_text()
-        return HTMLResponse(page)
 
     @app.get("/health")
     def health() -> dict[str, str]:

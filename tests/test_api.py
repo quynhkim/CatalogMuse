@@ -216,15 +216,7 @@ def test_health_and_missing_photo(tmp_path) -> None:
     app = create_app(tmp_path, FakeTools(), public_url="")
     with TestClient(app) as client:
         assert client.get("/health").json()["service"] == "catalogmuse-engine"
-        page = client.get("/")
-        assert page.status_code == 200
-        assert "Request changes" in page.text
-        assert "Choose scene styles" in page.text
-        assert "Choose images" in page.text
-        assert "Add a style" in page.text
-        assert "Images per style" in page.text
-        assert "Walmart" in page.text
-        assert "Drop this when the React app is ready." in page.text
+        assert client.get("/").status_code == 404
         missing = client.post("/v1/jobs", json={"spec": SPEC, "image_base64": ""})
         assert missing.status_code == 400
 
