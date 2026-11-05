@@ -1,0 +1,43 @@
+$kind: http-example
+name: Waiting on the cutout
+order: 1000
+request:
+  url: 'http://127.0.0.1:8790/v1/jobs/job_example'
+  method: GET
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    - key: Content-Type
+      value: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "job_example",
+        "status": "waiting",
+        "error": "",
+        "marketplaces": ["amazon", "walmart"],
+        "pending_agent": "segment",
+        "approve_allowed": true,
+        "agents": [
+          {
+            "name": "segment",
+            "state": "waiting",
+            "detail": "",
+            "output": {
+              "file": "cutout.png",
+              "model": "sam-3.1",
+              "concept": "headphones",
+              "masks": 1,
+              "confidence": 0.88,
+              "feedback": "",
+              "url": "https://asinzen-catalogmuse.s3.us-east-2.amazonaws.com/jobs/job_example/cutout.png?X-Amz-Expires=43200&X-Amz-Signature=example"
+            }
+          },
+          {"name": "art_director", "state": "pending", "detail": "", "output": null},
+          {"name": "scene", "state": "pending", "detail": "", "output": null},
+          {"name": "copy", "state": "pending", "detail": "", "output": null},
+          {"name": "rules", "state": "pending", "detail": "", "output": null}
+        ]
+      }

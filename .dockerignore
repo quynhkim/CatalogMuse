@@ -1,0 +1,9 @@
+.venv
+data
+postman
+.git
+.env
+.env.local
+__pycache__
+.pytest_cache
+*.sqlite

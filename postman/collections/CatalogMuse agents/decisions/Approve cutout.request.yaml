@@ -1,0 +1,16 @@
+$kind: http-request
+name: Approve cutout
+method: POST
+url: '{{base_url}}/v1/jobs/{{job_id}}/decisions'
+order: 1000
+description: Use when pending_agent is segment. Naming is not its own wait.
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "action": "approve",
+      "agent": "segment"
+    }

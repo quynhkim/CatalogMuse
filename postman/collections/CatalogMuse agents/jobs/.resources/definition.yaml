@@ -1,0 +1,4 @@
+$kind: collection
+name: Jobs
+description: Start one listing and read its status. Agents run in order, and the first wait is the cutout.
+order: 2000

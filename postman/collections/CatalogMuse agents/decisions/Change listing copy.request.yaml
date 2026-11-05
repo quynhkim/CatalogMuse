@@ -1,0 +1,17 @@
+$kind: http-request
+name: Change listing copy
+method: POST
+url: '{{base_url}}/v1/jobs/{{job_id}}/decisions'
+order: 7000
+description: One note sends the listing back to the copywriter. The auditor runs again, then the same approval is waiting.
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "action": "changes",
+      "agent": "rules",
+      "note": "Drop the size from the title."
+    }

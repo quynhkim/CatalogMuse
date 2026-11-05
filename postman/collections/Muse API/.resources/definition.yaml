@@ -1,0 +1,23 @@
+$kind: collection
+name: Muse API
+description: >-
+  Commercial Meta Model API used by CatalogMuse. Muse Spark names the
+  object, writes scene styles, and writes listing copy. SAM 3.1 segments
+  the product cutout. Muse Image paints each scene. Set MODEL_API_KEY
+  before sending requests. The engine default root is https://api.meta.ai/v1.
+variables:
+  - key: muse_base_url
+    value: 'https://api.meta.ai/v1'
+    description: 'Muse API root. Override via CATALOGMUSE_MUSE_URL env var.'
+  - key: model_api_key
+    value: ''
+    description: 'Bearer token. Set MODEL_API_KEY in your environment.'
+  - key: text_model
+    value: 'muse-spark-1.3'
+    description: 'Override via CATALOGMUSE_TEXT_MODEL env var.'
+  - key: image_model
+    value: 'muse-image-1.0'
+    description: 'Override via CATALOGMUSE_IMAGE_MODEL env var.'
+  - key: sam_model
+    value: 'sam-3.1'
+    description: 'Override via CATALOGMUSE_SAM_MODEL env var.'

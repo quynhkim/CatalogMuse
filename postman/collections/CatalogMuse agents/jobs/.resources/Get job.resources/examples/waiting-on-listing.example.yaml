@@ -1,0 +1,58 @@
+$kind: http-example
+name: Waiting on the listing
+order: 3000
+request:
+  url: 'http://127.0.0.1:8790/v1/jobs/job_example'
+  method: GET
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    - key: Content-Type
+      value: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "job_example",
+        "status": "waiting",
+        "error": "",
+        "marketplaces": ["amazon", "walmart"],
+        "pending_agent": "rules",
+        "approve_allowed": false,
+        "agents": [
+          {"name": "segment", "state": "approved", "detail": "", "output": {"file": "cutout.png", "model": "sam-3.1", "concept": "headphones"}},
+          {"name": "art_director", "state": "approved", "detail": "", "output": {"model": "muse-spark-1.3", "selected": ["The headphones rest on a wooden table, 16:9."], "variations": 1}},
+          {"name": "scene", "state": "approved", "detail": "", "output": {"file": "hero-1-1.jpg", "selected": ["hero-1-1.jpg"], "model": "muse-image-1.0"}},
+          {
+            "name": "copy",
+            "state": "waiting",
+            "detail": "",
+            "output": {
+              "model": "muse-spark-1.3",
+              "marketplaces": ["amazon", "walmart"],
+              "title": "Best North Kitchen Garlic Press",
+              "bullets": ["The best garlic press.", "Made of stainless steel.", "Measures 7.5 inches.", "Dishwasher safe.", "Includes a cleaning brush."],
+              "description": "A stainless steel garlic press.",
+              "walmart": {
+                "title": "Best North Kitchen Garlic Press",
+                "bullets": ["High quality steel.", "Measures 7.5 inches.", "Dishwasher safe."],
+                "short_description": "<ul><li>High quality steel.</li><li>Measures 7.5 inches.</li><li>Dishwasher safe.</li></ul>",
+                "shelf_description": "<p>A high quality garlic press.</p>"
+              }
+            }
+          },
+          {
+            "name": "rules",
+            "state": "waiting",
+            "detail": "",
+            "output": {
+              "marketplaces": ["amazon", "walmart"],
+              "amazon": {"violations": ["Banned phrase: best"], "clear": false},
+              "walmart": {"violations": ["Banned phrase: best", "Banned phrase: high quality"], "clear": false},
+              "violations": ["Amazon: Banned phrase: best", "Walmart: Banned phrase: best", "Walmart: Banned phrase: high quality"],
+              "clear": false
+            }
+          }
+        ]
+      }

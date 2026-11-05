@@ -1,0 +1,3 @@
+$kind: collection
+name: SAM
+description: Segment Anything Model 3.1. Returns bounding-box-local one-bit masks for a noun phrase.

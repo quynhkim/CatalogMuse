@@ -1,0 +1,20 @@
+$kind: http-request
+name: Get job
+method: GET
+url: '{{base_url}}/v1/jobs/{{job_id}}'
+order: 2000
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      const body = pm.response.json();
+      const agents = (body && body.agents) || [];
+      const segment = agents.find((agent) => agent.name === "segment");
+      const scene = agents.find((agent) => agent.name === "scene");
+      const sceneFile = scene && scene.output && scene.output.images && scene.output.images[0] && scene.output.images[0].file;
+      const segmentFile = segment && segment.output && segment.output.file;
+      const fileName = sceneFile || segmentFile;
+      if (fileName) {
+        pm.collectionVariables.set("file_name", fileName);
+      }
+examples: './.resources/Get job.resources/examples'

@@ -1,0 +1,81 @@
+$kind: http-example
+name: Waiting on scene images
+order: 2000
+request:
+  url: 'http://127.0.0.1:8790/v1/jobs/job_example'
+  method: GET
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    - key: Content-Type
+      value: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "job_example",
+        "status": "waiting",
+        "error": "",
+        "marketplaces": ["amazon", "walmart"],
+        "pending_agent": "scene",
+        "approve_allowed": true,
+        "agents": [
+          {
+            "name": "segment",
+            "state": "approved",
+            "detail": "",
+            "output": {
+              "file": "cutout.png",
+              "model": "sam-3.1",
+              "concept": "headphones",
+              "masks": 1,
+              "confidence": 0.88,
+              "feedback": "",
+              "url": "https://asinzen-catalogmuse.s3.us-east-2.amazonaws.com/jobs/job_example/cutout.png?X-Amz-Expires=43200&X-Amz-Signature=example"
+            }
+          },
+          {
+            "name": "art_director",
+            "state": "approved",
+            "detail": "",
+            "output": {
+              "model": "muse-spark-1.3",
+              "styles": [
+                "Headphones on an oak desk, soft morning light, 16:9.",
+                "Headphones on a side table, warm indoor light, 16:9.",
+                "Headphones on a white studio background, soft shadow, 16:9."
+              ],
+              "prompt": "Headphones on an oak desk, soft morning light, 16:9.",
+              "variations": 1,
+              "selected": ["Headphones on an oak desk, soft morning light, 16:9."],
+              "feedback": ""
+            }
+          },
+          {
+            "name": "scene",
+            "state": "waiting",
+            "detail": "",
+            "output": {
+              "file": "hero-1-1.jpg",
+              "model": "muse-image-1.0",
+              "prompt": "Headphones on an oak desk, soft morning light, 16:9.",
+              "variations": 1,
+              "count": 1,
+              "feedback": "",
+              "url": "https://asinzen-catalogmuse.s3.us-east-2.amazonaws.com/jobs/job_example/hero-1-1.jpg?X-Amz-Expires=43200&X-Amz-Signature=example",
+              "images": [
+                {
+                  "file": "hero-1-1.jpg",
+                  "prompt": "Headphones on an oak desk, soft morning light, 16:9.",
+                  "style": 1,
+                  "variation": 1,
+                  "url": "https://asinzen-catalogmuse.s3.us-east-2.amazonaws.com/jobs/job_example/hero-1-1.jpg?X-Amz-Expires=43200&X-Amz-Signature=example"
+                }
+              ]
+            }
+          },
+          {"name": "copy", "state": "pending", "detail": "", "output": null},
+          {"name": "rules", "state": "pending", "detail": "", "output": null}
+        ]
+      }

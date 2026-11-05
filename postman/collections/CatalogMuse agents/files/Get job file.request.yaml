@@ -1,0 +1,9 @@
+$kind: http-request
+name: Get job file
+method: GET
+url: '{{base_url}}/v1/jobs/{{job_id}}/files/{{file_name}}'
+order: 1000
+description: >-
+  Reads the image stored with the engine. Prefer output.url from Get job.
+  cutout.png is image/png. Scene files such as hero-1-1.jpg are image/jpeg.
+examples: './.resources/Get job file.resources/examples'

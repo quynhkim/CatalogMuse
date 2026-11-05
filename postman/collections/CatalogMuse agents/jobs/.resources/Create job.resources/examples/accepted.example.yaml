@@ -1,0 +1,30 @@
+$kind: http-example
+name: Job accepted
+order: 1000
+request:
+  url: 'http://127.0.0.1:8790/v1/jobs'
+  method: POST
+response:
+  statusCode: 202
+  statusText: Accepted
+  headers:
+    - key: Content-Type
+      value: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "job_example",
+        "status": "running",
+        "error": "",
+        "marketplaces": ["amazon", "walmart"],
+        "pending_agent": null,
+        "approve_allowed": false,
+        "agents": [
+          {"name": "segment", "state": "pending", "detail": "", "output": null},
+          {"name": "art_director", "state": "pending", "detail": "", "output": null},
+          {"name": "scene", "state": "pending", "detail": "", "output": null},
+          {"name": "copy", "state": "pending", "detail": "", "output": null},
+          {"name": "rules", "state": "pending", "detail": "", "output": null}
+        ]
+      }

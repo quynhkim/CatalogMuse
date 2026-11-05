@@ -1,0 +1,9 @@
+$kind: collection
+name: Decisions
+description: >-
+  Send a decision only while the job is waiting. action is approve or changes.
+  agent is optional and must match pending_agent when set. A decision while
+  an agent is running returns 409. The copywriter does not stop on its own.
+  The listing approval is pending_agent rules, and that one approval covers
+  the copywriter and the auditor.
+order: 3000

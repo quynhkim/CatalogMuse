@@ -1,0 +1,21 @@
+$kind: http-request
+name: Approve scene styles
+method: POST
+url: '{{base_url}}/v1/jobs/{{job_id}}/decisions'
+order: 3000
+description: Use when pending_agent is art_director and styles are present. Send 1 to 8 styles and 1 to 4 images per style.
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "action": "approve",
+      "agent": "art_director",
+      "styles": [
+        "Headphones on an oak desk, soft morning light, 16:9.",
+        "Headphones on a side table, warm indoor light, 16:9."
+      ],
+      "variations": 2
+    }
