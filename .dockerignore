@@ -1,9 +1,14 @@
 .venv
 data
-postman
+node_modules
+dist
+dist-ssr
 .git
-.env
-.env.local
 __pycache__
 .pytest_cache
 *.sqlite
+*.egg-info
+*.md
+.env
+.env.*
+.DS_Store
