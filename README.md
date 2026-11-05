@@ -1,17 +1,13 @@
-# Catalog Muse
+# Catalog Muse engine
 
-One supplier photo and a spec sheet become a listing draft. The Python engine does the work. The React app is where a person reviews each step. Nothing is published automatically.
+One supplier photo and a spec sheet become a listing draft. A person approves each step. This service does not publish the listing.
 
-Put `MODEL_API_KEY` in `.env.local`. That file is not committed. Then start the engine and the app together:
+Put `MODEL_API_KEY` in `.env.local`. That file is not committed. Then:
 
 ```bash
 ./scripts/start.sh
 ```
 
-The engine listens on http://127.0.0.1:8790. The app listens on http://127.0.0.1:5173. Ctrl+C stops what the script started.
+The engine listens on http://127.0.0.1:8790. Ctrl+C stops it.
 
-Local development calls the engine on this machine. Staging and production call https://catalog-muse-api.asinzen.com. The deployed app is https://catalog-muse-demo.asinzen.com/.
-
-## Images
-
-`Dockerfile` builds the engine. `Dockerfile.web` builds the React app into nginx.
+`Dockerfile` builds the engine image.

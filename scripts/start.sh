@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
-# Start the engine and the React app. Ctrl+C stops whatever this script started.
+# Start the engine. Ctrl+C stops it.
 set -euo pipefail
 
 root=$(cd "$(dirname "$0")/.." && pwd)
 cd "$root"
 
 engine_url="http://127.0.0.1:8790"
-app_url="http://127.0.0.1:5173"
 started=()
 
 up() {
@@ -36,12 +35,6 @@ fi
 if [[ ! -x .venv/bin/catalogmuse-engine && ! -x .venv/bin/catalogmuse ]]; then
   .venv/bin/pip install -e .
 fi
-if [[ ! -d node_modules ]]; then
-  npm ci
-fi
-if [[ ! -f .env.development ]]; then
-  cp env.development .env.development
-fi
 if [[ ! -f .env.local ]] || ! grep -q '^MODEL_API_KEY=.' .env.local; then
   echo "Put MODEL_API_KEY in .env.local before starting." >&2
   exit 1
@@ -49,8 +42,11 @@ fi
 
 if up "$engine_url/health"; then
   echo "Engine already running at $engine_url"
-else
-  python3 - "$root" <<'PY' &
+  trap - EXIT INT TERM
+  exit 0
+fi
+
+python3 - "$root" <<'PY' &
 import os
 import pathlib
 import sys
@@ -76,32 +72,16 @@ if not binary.exists():
     binary = root / ".venv" / "bin" / "catalogmuse"
 os.execv(str(binary), [str(binary)])
 PY
-  started+=("$!")
-fi
-
-if up "$app_url"; then
-  echo "App already running at $app_url"
-else
-  npm run dev -- --host 127.0.0.1 --port 5173 &
-  started+=("$!")
-fi
-
-if [[ ${#started[@]} -eq 0 ]]; then
-  echo "Engine  $engine_url"
-  echo "App     $app_url"
-  trap - EXIT INT TERM
-  exit 0
-fi
+started+=("$!")
 
 for _ in $(seq 1 40); do
-  if up "$engine_url/health" && up "$app_url"; then
+  if up "$engine_url/health"; then
     echo "Engine  $engine_url"
-    echo "App     $app_url"
     echo "Press Ctrl+C to stop."
     while true; do
       for pid in "${started[@]}"; do
         if ! kill -0 "$pid" 2>/dev/null; then
-          echo "A process exited." >&2
+          echo "The engine exited." >&2
           exit 1
         fi
       done
@@ -110,12 +90,12 @@ for _ in $(seq 1 40); do
   fi
   for pid in "${started[@]}"; do
     if ! kill -0 "$pid" 2>/dev/null; then
-      echo "A process exited before the app was ready." >&2
+      echo "The engine exited before it was ready." >&2
       exit 1
     fi
   done
   sleep 0.5
 done
 
-echo "The app did not become ready." >&2
+echo "The engine did not become ready." >&2
 exit 1
